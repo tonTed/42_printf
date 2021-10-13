@@ -6,7 +6,7 @@
 /*   By: tblanco <tblanco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 10:30:08 by tblanco           #+#    #+#             */
-/*   Updated: 2021/10/05 12:53:31 by tblanco          ###   ########.fr       */
+/*   Updated: 2021/10/13 19:28:07 by tblanco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,8 @@
 
 int	ft_printf(const char *format, ...)
 {
-	
+	(void)format;
+    
+    printf("%d\n", ft_strlen("test"));
+    return (0);
 }

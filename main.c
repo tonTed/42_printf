@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tblanco <tblanco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/13 14:27:13 by tblanco           #+#    #+#             */
-/*   Updated: 2021/10/14 16:03:14 by tblanco          ###   ########.fr       */
+/*   Created: 2021/10/14 10:01:45 by tblanco           #+#    #+#             */
+/*   Updated: 2021/10/14 16:00:55 by tblanco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "ft_printf.h"
 
-# include <stdarg.h>
-# include "libft.h"
+int main(void)
+{
 
-#endif
+}

@@ -6,7 +6,7 @@
 #    By: tblanco <tblanco@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/06 10:22:54 by tblanco           #+#    #+#              #
-#    Updated: 2021/10/13 19:34:24 by tblanco          ###   ########.fr        #
+#    Updated: 2021/10/14 15:49:30 by tblanco          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,12 +19,41 @@ OBJDIR		= obj
 
 CC			= gcc
 CFLAGS		= -Wall -Wextra -Werror
-CFLAGS		+= -iquote$(INCDIR)
+INC			= -iquote$(INCDIR) -iquote$(LIBFTDIR)/$(INCDIR)
 
-FILES		= printf
+SRCS    	:= $(shell find $(SRCDIR) -name '*.c')
+OBJS		:= $(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SRCS))
 
-SRCS		= $(addprefix $(SRCDIR)/ft_, $(addsuffix .c, $(FILES)))
-OBJS		= $(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SRCS))
+
+$(OBJDIR)/%.o : $(SRCDIR)/%.c
+	$(CC) $(CFLAGS) $(INC) -c $< -o $@
+
+all: $(NAME)
+
+$(NAME)	: $(OBJS)
+	make o -C $(LIBFTDIR)
+	ar rc $(NAME) $(OBJS) $(shell find $(LIBFTDIR) -name '*.o')
+	ranlib $(NAME)
+	@printf ${GREEN}"[$@] created\n"${RESET}
+
+clean	:
+	rm -f $(OBJS)
+	make clean -C $(LIBFTDIR)
+	@printf $(YELLOW)"[$(NAME)] objects removed\n"$(RESET)
+
+fclean	: clean 
+	rm -f $(NAME)
+	make fclean -C $(LIBFTDIR)
+	@printf $(YELLOW)"[$(NAME)] lib removed\n"$(RESET)
+
+re		: fclean all
+
+test	: all
+	$(CC) $(CFLAGS) $(INC) main.c -L./ -lftprintf
+	./a.out | cat -e
+	rm -f a.out
+
+.PHONY	: clean fclean all re libft $(OBJDIR)
 
 # Colors
 BLACK	:= "\e[0;30m"
@@ -35,41 +64,6 @@ BLUE	:= "\e[0;34m"
 MAGENTA	:= "\e[0;35m"
 CYAN	:= "\e[0;36m"
 RESET	:="\e[0m"
-
-$(OBJDIR)/%.o : $(SRCDIR)/%.c
-	$(CC) $(CFLAGS) -c $< -o $@
-
-all: $(NAME)
-
-$(NAME)	: libft $(OBJS)
-	ar rc $(NAME) $(OBJS)
-	ranlib $(NAME)
-	@printf ${GREEN}[$(NAME)] created\\n${RESET}
-
-clean	:
-	rm -f $(OBJS)
-
-fclean	: clean 
-	rm -f $(NAME)
-
-re		: fclean all
-
-libft	:
-			make -C $(LIBFTDIR)
-
-.PHONY	: clean fclean all re libft $(OBJS_DIR)
-
-# buildrepo:
-# 	@$(call make-repo)
-
-# define make-repo
-#    for dir in $(SRCS_DIR); \
-#    do \
-# 	mkdir -p $(OBJS_DIR)/$$dir; \
-#    done
-# endef
-
-
 
 # $@ : cible de la règle
 # $< : premier pré-requis

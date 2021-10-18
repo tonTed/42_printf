@@ -6,52 +6,49 @@
 #    By: tblanco <tblanco@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/06 10:22:54 by tblanco           #+#    #+#              #
-#    Updated: 2021/10/14 15:49:30 by tblanco          ###   ########.fr        #
+#    Updated: 2021/10/18 18:21:37 by tblanco          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= libftprintf.a
 
-LIBFTDIR	= libft
 SRCDIR		= src
 INCDIR		= include
 OBJDIR		= obj
 
 CC			= gcc
 CFLAGS		= -Wall -Wextra -Werror
-INC			= -iquote$(INCDIR) -iquote$(LIBFTDIR)/$(INCDIR)
 
-SRCS    	:= $(shell find $(SRCDIR) -name '*.c')
-OBJS		:= $(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SRCS))
-
+SRCS    	:=	printf \
+				libft_utils
+					
+OBJS		:=	$(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, \
+				$(addprefix src/ft_, $(addsuffix .c, $(SRCS))))
 
 $(OBJDIR)/%.o : $(SRCDIR)/%.c
-	$(CC) $(CFLAGS) $(INC) -c $< -o $@
+	$(CC) $(CFLAGS) -Iinclude -c $< -o $@
 
 all: $(NAME)
 
 $(NAME)	: $(OBJS)
-	make o -C $(LIBFTDIR)
-	ar rc $(NAME) $(OBJS) $(shell find $(LIBFTDIR) -name '*.o')
+	ar rc $(NAME) $(OBJS)
 	ranlib $(NAME)
 	@printf ${GREEN}"[$@] created\n"${RESET}
 
 clean	:
 	rm -f $(OBJS)
-	make clean -C $(LIBFTDIR)
 	@printf $(YELLOW)"[$(NAME)] objects removed\n"$(RESET)
 
 fclean	: clean 
 	rm -f $(NAME)
-	make fclean -C $(LIBFTDIR)
 	@printf $(YELLOW)"[$(NAME)] lib removed\n"$(RESET)
 
 re		: fclean all
 
 test	: all
 	$(CC) $(CFLAGS) $(INC) main.c -L./ -lftprintf
-	./a.out | cat -e
-	rm -f a.out
+	@./a.out
+	@rm -f a.out
 
 .PHONY	: clean fclean all re libft $(OBJDIR)
 

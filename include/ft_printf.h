@@ -6,7 +6,7 @@
 /*   By: tblanco <tblanco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 14:27:13 by tblanco           #+#    #+#             */
-/*   Updated: 2021/10/18 18:04:57 by tblanco          ###   ########.fr       */
+/*   Updated: 2021/11/07 10:22:53 by tblanco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,10 @@
 /* define */
 # define CONV "cspdiuxX%"
 # define HEX_MINUS "0123456789abcdef"
-# define DECIMAL "0123456789"
 
 /* libft */
-int	ft_putchar(char c);
-int	ft_putstr(char *s);
-int	ft_putbase(int n, int *printed, char *base);
-
+size_t	ft_strlen(char *s);
+int     ft_putstr(char *s);
 /* printf */
 int	ft_printf(const char *format, ...);
 

@@ -6,7 +6,7 @@
 #    By: tblanco <tblanco@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/06 10:22:54 by tblanco           #+#    #+#              #
-#    Updated: 2021/11/07 08:56:53 by tblanco          ###   ########.fr        #
+#    Updated: 2021/11/07 10:32:24 by tblanco          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,12 +36,12 @@ $(NAME)	: $(OBJS)
 	@printf ${GREEN}"[$@] created\n"${RESET}
 
 clean	:
-	rm -f $(OBJS)
-	@printf $(YELLOW)"[$(NAME)] objects removed\n"$(RESET)
+	@rm -f $(OBJS)
+#@printf $(YELLOW)"[$(NAME)] objects removed\n"$(RESET)
 
 fclean	: clean 
-	rm -f $(NAME)
-	@printf $(YELLOW)"[$(NAME)] lib removed\n"$(RESET)
+	@rm -f $(NAME)
+#@printf $(YELLOW)"[$(NAME)] lib removed\n"$(RESET)
 
 re		: fclean all
 
@@ -49,6 +49,7 @@ test	: all
 	$(CC) $(CFLAGS) $(INC) test/main.c -L./ -lftprintf
 	@./a.out
 	@rm -f a.out
+	@make fclean
 
 .PHONY	: clean fclean all re libft $(OBJDIR)
 

@@ -6,7 +6,7 @@
 /*   By: tblanco <tblanco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 10:30:08 by tblanco           #+#    #+#             */
-/*   Updated: 2021/11/07 08:59:45 by tblanco          ###   ########.fr       */
+/*   Updated: 2021/11/07 16:34:37 by tblanco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,33 @@
 	deux sont fournis. 
 */
 
-int	ft_printf(const char *format, ...)
+int		ft_manage_conv(char conv, va_list *args)
 {
+	int	len;
+	
+	len = 0;
+	if (conv == 's')
+		len = ft_putstr(va_arg(*args, char*));
+	return (len);
+}
 
+int		ft_printf(const char *format, ...)
+{
+	va_list args;
+	int		len;
+
+	len = 0;
+	va_start(args, format);
+	while (*format)
+	{
+		if (*format != '%')
+		{
+			write(1, format, 1);
+			len++;
+		}
+		else
+			len += ft_manage_conv(*(++format), &args);
+		format++;
+	}	
+	return len;
 }

@@ -6,7 +6,7 @@
 /*   By: tblanco <tblanco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 10:30:08 by tblanco           #+#    #+#             */
-/*   Updated: 2021/11/07 16:34:37 by tblanco          ###   ########.fr       */
+/*   Updated: 2021/11/07 16:48:11 by tblanco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,11 @@ int		ft_manage_conv(char conv, va_list *args)
 	len = 0;
 	if (conv == 's')
 		len = ft_putstr(va_arg(*args, char*));
+	else if (conv == 'c')
+		len = ft_putchar(va_arg(*args, unsigned int));
+	else if (conv == '%')
+		len = ft_putchar('%');
+	
 	return (len);
 }
 

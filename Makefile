@@ -6,7 +6,7 @@
 #    By: tblanco <tblanco@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/06 10:22:54 by tblanco           #+#    #+#              #
-#    Updated: 2021/10/18 18:21:37 by tblanco          ###   ########.fr        #
+#    Updated: 2021/11/07 08:56:53 by tblanco          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ fclean	: clean
 re		: fclean all
 
 test	: all
-	$(CC) $(CFLAGS) $(INC) main.c -L./ -lftprintf
+	$(CC) $(CFLAGS) $(INC) test/main.c -L./ -lftprintf
 	@./a.out
 	@rm -f a.out
 

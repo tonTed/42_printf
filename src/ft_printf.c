@@ -6,12 +6,12 @@
 /*   By: tblanco <tblanco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 10:30:08 by tblanco           #+#    #+#             */
-/*   Updated: 2021/10/18 18:40:47 by tblanco          ###   ########.fr       */
+/*   Updated: 2021/11/07 08:59:45 by tblanco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // #include "ft_printf.h"
-#include "../include/ft_printf.h"
+#include "ft_printf.h"
 
 /*
 	%c imprime un seul caractère.
@@ -103,56 +103,7 @@
 	deux sont fournis. 
 */
 
-// int	ft_check_type(char c)
-// {
-// 	int printed;
-
-// 	printed = 0;
-// 	ft_putchar_fd(c, 1);
-// 	return (1);
-// }
-
-int ft_prefix(char *prefix, int argv, int *printed, char *base)
-{
-	*printed += ft_putstr(prefix);
-	*printed += ft_putbase(argv, printed, base);
-	return (*printed);
-}
-
-int	ft_manage_conv(char c, va_list *argv)
-{
-	int	printed;
-
-	printed = 0;
-	if (c == 'c')
-		return (ft_putchar(va_arg(*argv, int)));
-	if (c == 's')
-		return (ft_putstr(va_arg(*argv, char *)));
-	if (c == 'd' || c == 'i')
-		return (ft_putbase(va_arg(*argv, int), &printed, DECIMAL));
-	if (c == 'p')
-		return (ft_prefix("", va_arg(*argv, int), &printed, HEX_MINUS));
-	// if (c == 'x')
-	// 	return ()
-	return (0);
-}
-
 int	ft_printf(const char *format, ...)
 {
-	va_list argv;
-	int		printed;
 
-	printed = 0;
-	va_start(argv, format);
-	while(*format)
-	{
-		if (*format != '%')
-			printed += ft_putchar(*format);
-		else if (*(format + 1) == '%')
-			printed += ft_putchar(*++format);
-		else
-			printed += ft_manage_conv(*++format, &argv);
-		format++;
-	}
-	return (printed);
 }

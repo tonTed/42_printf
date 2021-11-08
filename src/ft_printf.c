@@ -6,12 +6,12 @@
 /*   By: tblanco <tblanco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 10:30:08 by tblanco           #+#    #+#             */
-/*   Updated: 2021/11/07 16:48:11 by tblanco          ###   ########.fr       */
+/*   Updated: 2021/11/07 19:27:18 by tblanco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // #include "ft_printf.h"
-#include "ft_printf.h"
+#include "../include/ft_printf.h"
 
 /*
 	%c imprime un seul caractère.
@@ -100,7 +100,9 @@
 	+ : Un signe (+ ou -) doit toujours être imprimé avant un nombre produit
 	par une conversion signée. Par défaut, un signe n'est utilisé que pour des
 	valeurs négatives. Un attribut + surcharge un attribut « espace » si les
-	deux sont fournis. 
+	deux sont fournis.
+
+	[c][s]pdiuxX[%]
 */
 
 int		ft_manage_conv(char conv, va_list *args)
@@ -110,10 +112,19 @@ int		ft_manage_conv(char conv, va_list *args)
 	len = 0;
 	if (conv == 's')
 		len = ft_putstr(va_arg(*args, char*));
-	else if (conv == 'c')
+	else if (conv == 'c' || conv == 'u')
 		len = ft_putchar(va_arg(*args, unsigned int));
 	else if (conv == '%')
 		len = ft_putchar('%');
+	else if (conv == 'x' || conv == 'X')
+		len = ft_puthex(va_arg(*args, unsigned int), conv, HEX_LOWER);
+	else if (conv == 'p')
+	{
+		len = ft_putstr("0x");
+		len+= ft_puthex(va_arg(*args, unsigned long long), conv, HEX_LOWER);
+	}
+	else if (conv == 'd' || conv == 'i')
+		len = ft_putnbr(va_arg(*args, int), conv);
 	
 	return (len);
 }

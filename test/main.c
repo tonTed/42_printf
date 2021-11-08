@@ -1,6 +1,7 @@
 #include "../include/ft_printf.h"
 #include "ft_colors.h"
 #include <limits.h>
+#include <stdio.h>
 
 #define START ft_putstr(RED "--> " CYN "ft_printf: " reset)
 #define MIDDLE printf(RED "< %d\n" reset, len);printf(RED "--> " MAG "   printf: " reset)
@@ -142,6 +143,6 @@ int	main(void)
 	test++;		test_dec_1_arg("%i", -1024 ,test);								// 43
 	test++;		test_dec_1_arg("%i", INT_MIN ,test);							// 44
 	*/
-	
+
 	return 0;
 }

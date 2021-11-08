@@ -6,7 +6,7 @@
 /*   By: tblanco <tblanco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 10:30:08 by tblanco           #+#    #+#             */
-/*   Updated: 2021/11/07 19:27:18 by tblanco          ###   ########.fr       */
+/*   Updated: 2021/11/07 20:03:32 by tblanco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,36 +102,36 @@
 	valeurs négatives. Un attribut + surcharge un attribut « espace » si les
 	deux sont fournis.
 
-	[c][s]pdiuxX[%]
 */
 
-int		ft_manage_conv(char conv, va_list *args)
+int	ft_manage_conv(char conv, va_list *args)
 {
 	int	len;
-	
+
 	len = 0;
 	if (conv == 's')
-		len = ft_putstr(va_arg(*args, char*));
-	else if (conv == 'c' || conv == 'u')
+		len = ft_putstr(va_arg(*args, char *));
+	else if (conv == 'c')
 		len = ft_putchar(va_arg(*args, unsigned int));
 	else if (conv == '%')
 		len = ft_putchar('%');
 	else if (conv == 'x' || conv == 'X')
-		len = ft_puthex(va_arg(*args, unsigned int), conv, HEX_LOWER);
+		len = ft_putbase(va_arg(*args, unsigned int), conv, HEX_LOWER);
 	else if (conv == 'p')
 	{
 		len = ft_putstr("0x");
-		len+= ft_puthex(va_arg(*args, unsigned long long), conv, HEX_LOWER);
+		len += ft_putbase(va_arg(*args, unsigned long long), conv, HEX_LOWER);
 	}
 	else if (conv == 'd' || conv == 'i')
 		len = ft_putnbr(va_arg(*args, int), conv);
-	
+	else if (conv == 'u')
+		len = ft_putbase(va_arg(*args, unsigned int), conv, DECIMAL);
 	return (len);
 }
 
-int		ft_printf(const char *format, ...)
+int	ft_printf(const char *format, ...)
 {
-	va_list args;
+	va_list	args;
 	int		len;
 
 	len = 0;
@@ -146,6 +146,7 @@ int		ft_printf(const char *format, ...)
 		else
 			len += ft_manage_conv(*(++format), &args);
 		format++;
-	}	
-	return len;
+	}
+	va_end(args);
+	return (len);
 }

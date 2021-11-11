@@ -6,7 +6,7 @@
 #    By: tblanco <tblanco@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/06 10:22:54 by tblanco           #+#    #+#              #
-#    Updated: 2021/11/07 18:06:54 by tblanco          ###   ########.fr        #
+#    Updated: 2021/11/11 14:09:34 by tblanco          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ CFLAGS		= -Wall -Wextra -Werror
 
 SRCS    	:=	printf \
 				libft_utils \
-				conver
+				puts_utils
 					
 OBJS		:=	$(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, \
 				$(addprefix src/ft_, $(addsuffix .c, $(SRCS))))

@@ -6,7 +6,7 @@
 /*   By: tblanco <tblanco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 14:27:13 by tblanco           #+#    #+#             */
-/*   Updated: 2021/11/07 19:45:36 by tblanco          ###   ########.fr       */
+/*   Updated: 2021/11/11 14:07:42 by tblanco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,12 @@
 
 /* utils */
 size_t	ft_strlen(char *s);
+int     ft_lennb_base(unsigned long long nb, int lenbase);
 int		ft_putstr(char *s);
 int		ft_putchar(char c);
 int		ft_putnbr(int nb, char conv);
 int		ft_putbase(unsigned long long nb, char conv, char *base);
+
 
 /* printf */
 int		ft_printf(const char *format, ...);

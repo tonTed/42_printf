@@ -27,6 +27,7 @@ OBJS		:=	$(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, \
 				$(addprefix src/ft_, $(addsuffix .c, $(SRCS))))
 
 $(OBJDIR)/%.o : $(SRCDIR)/%.c
+	@mkdir -p $(OBJDIR)
 	$(CC) $(CFLAGS) -Iinclude -c $< -o $@
 
 all: $(NAME)
@@ -37,12 +38,12 @@ $(NAME)	: $(OBJS)
 	@printf ${GREEN}"[$@] created\n"${RESET}
 
 clean	:
-	@rm -f $(OBJS)
-#@printf $(YELLOW)"[$(NAME)] objects removed\n"$(RESET)
+	@rm -rf $(OBJDIR)
+	@printf $(YELLOW)"[$(NAME)] objects removed\n"$(RESET)
 
 fclean	: clean 
 	@rm -f $(NAME)
-#@printf $(YELLOW)"[$(NAME)] lib removed\n"$(RESET)
+	@printf $(YELLOW)"[$(NAME)] lib removed\n"$(RESET)
 
 re		: fclean all
 
